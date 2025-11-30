@@ -1,0 +1,57 @@
+/* Container */
+.stats-container {
+  width: 90%;
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  color: #000000;
+}
+
+/* Page Title */
+.stats-title {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 25px;
+}
+
+/* Cards Container */
+.stats-list {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* Individual Card */
+.stats-card {
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 15px;
+  padding: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+.stats-card:hover {
+  background: rgba(255, 255, 255, 0.12);
+  transform: translateY(-3px);
+}
+
+.stats-card h2 {
+  margin: 0 0 6px 0;
+  font-size: 1.3rem;
+}
+
+.stats-card p {
+  margin: 4px 0;
+  font-size: 0.95rem;
+  color: #4d4d4d;
+}
+
+.stats-loading {
+  text-align: center;
+  margin-top: 40px;
+  font-size: 1.1rem;
+}
