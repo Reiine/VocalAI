@@ -8,6 +8,7 @@ import DebateSession from "./components/DebateSession";
 import Stats from "./components/Stats";
 import StatsDetails from "./components/StatsDetails";
 import Compare from "./components/Compare";
+import Profile from "./components/Profile";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -39,6 +40,7 @@ function App() {
           <Route path="/stats/" element={<Stats/>}/>
           <Route path="/stats/:id" element={<StatsDetails/>}/>
           <Route path="/compare/:id" element={<Compare/>}/>
+          <Route path="/profile" element={<Profile/>}/>
         </Routes>
       ) : (
         <Routes>

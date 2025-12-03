@@ -37,6 +37,12 @@ const Compare = () => {
   const [previous, setPrevious] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  const calculateProgress = (currentVal, previousVal) => {
+    const difference = currentVal - previousVal;
+    const percent = ((difference / previousVal) * 100).toFixed(1);
+    return { difference, percent, isPositive: difference >= 0 };
+  };
+
   useEffect(() => {
     const loadSessions = async () => {
       try {
@@ -78,11 +84,9 @@ const Compare = () => {
     loadSessions();
   }, [id]);
 
-  if (loading)
-    return <p className="compare-loading">Loading comparison...</p>;
+  if (loading) return <p className="compare-loading">Loading comparison...</p>;
 
-  if (!current)
-    return <p className="compare-loading">Session not found.</p>;
+  if (!current) return <p className="compare-loading">Session not found.</p>;
 
   if (!previous)
     return (
@@ -162,7 +166,7 @@ const Compare = () => {
         ← Back
       </button>
 
-      <h1 className="compare-title">📊 Comparison Report</h1>
+      <h1 className="compare-title">Comparison Report</h1>
       <p className="compare-subtitle">
         Comparing your recent session with your previous performance.
       </p>
@@ -171,7 +175,40 @@ const Compare = () => {
           RADAR CHART
       -------------------------- */}
       <div className="compare-section">
-        <h2>Radar Skill Comparison</h2>
+        <div className="section-header">
+          <h2>Radar Skill Comparison</h2>
+          <div
+            className="progress-indicator"
+            data-positive={
+              calculateProgress(
+                (current.feedback.grammar +
+                  current.feedback.confidence +
+                  current.feedback.clarity) /
+                  3,
+                (previous.feedback.grammar +
+                  previous.feedback.confidence +
+                  previous.feedback.clarity) /
+                  3
+              ).isPositive
+            }
+          >
+            {(() => {
+              const progress = calculateProgress(
+                (current.feedback.grammar +
+                  current.feedback.confidence +
+                  current.feedback.clarity) /
+                  3,
+                (previous.feedback.grammar +
+                  previous.feedback.confidence +
+                  previous.feedback.clarity) /
+                  3
+              );
+              return progress.isPositive
+                ? `📈 +${progress.difference} (${progress.percent}%)`
+                : `📉 ${progress.difference} (${progress.percent}%)`;
+            })()}
+          </div>
+        </div>
         <RadarChart
           cx={250}
           cy={200}
@@ -229,7 +266,12 @@ const Compare = () => {
           <XAxis dataKey="session" />
           <YAxis domain={[0, 10]} />
           <Tooltip />
-          <Line type="monotone" dataKey="avg" stroke="#10b981" strokeWidth={3} />
+          <Line
+            type="monotone"
+            dataKey="avg"
+            stroke="#10b981"
+            strokeWidth={3}
+          />
         </LineChart>
       </div>
 

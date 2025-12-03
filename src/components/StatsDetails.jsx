@@ -45,7 +45,6 @@ const StatsDetails = () => {
 
   return (
     <div className="stats-details-container">
-      {/* Header */}
       <button className="stats-back-btn" onClick={() => navigate(-1)}>
         ← Back
       </button>
@@ -53,7 +52,6 @@ const StatsDetails = () => {
       <h1 className="stats-details-title">{topic}</h1>
       <p className="stats-details-timestamp">{humanTime}</p>
 
-      {/* Session Summary */}
       <div className="stats-summary">
         <div className="stats-summary-card">
           <p className="stats-summary-label">Duration</p>
@@ -71,13 +69,11 @@ const StatsDetails = () => {
         </div>
       </div>
 
-      {/* Ratings */}
       <h2 className="stats-section-title">📈 Performance Ratings</h2>
-      <RatingBar label="Grammar" value={feedback.grammar} />
-      <RatingBar label="Confidence" value={feedback.confidence} />
-      <RatingBar label="Clarity" value={feedback.clarity} />
+      <RatingBar label="Grammar" value={feedback.grammar} data-value={feedback.grammar}  />
+      <RatingBar label="Confidence" value={feedback.confidence} data-value={feedback.confidence}  />
+      <RatingBar label="Clarity" value={feedback.clarity} data-value={feedback.clarity}  />
 
-      {/* Average Score */}
       <div className="stats-detailed-feedback">
         <h3 className="stats-section-title">🏆 Average Score</h3>
         <div className="rating-bar">
@@ -94,7 +90,6 @@ const StatsDetails = () => {
         </div>
       </div>
 
-      {/* Strengths & Weaknesses */}
       <div className="stats-strengths-weaknesses">
         <div className="stats-card">
           <h3>💪 Strengths</h3>
@@ -111,7 +106,6 @@ const StatsDetails = () => {
         </div>
       </div>
 
-      {/* Detailed Feedback */}
       <div className="stats-detailed-feedback">
         <h3 className="stats-section-title">📝 Detailed Feedback</h3>
         <p className="text-gray-700 whitespace-pre-line">
@@ -130,13 +124,10 @@ const StatsDetails = () => {
 
 export default StatsDetails;
 
-/* ----------------------------
-   PROGRESS BAR COMPONENT
------------------------------ */
 
 const RatingBar = ({ label, value }) => {
   return (
-    <div className="rating-bar">
+    <div className="rating-bar" data-value={value} >
       <div className="rating-bar-labels">
         <span>{label}</span>
         <span>{value}/10</span>

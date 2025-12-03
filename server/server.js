@@ -19,9 +19,7 @@ app.use(express.json());
 const GEMINI_API_URL =
   "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent";
 
-// ------------------------------------------
-// ROUTE 1: AI DEBATE RESPONSE (Gemini)
-// ------------------------------------------
+
 app.post("/debate", async (req, res) => {
   try {
     const { message, topic } = req.body;
@@ -63,9 +61,7 @@ Your job:
   }
 });
 
-// ------------------------------------------
-// ROUTE 2: ENGLISH FEEDBACK (Gemini)
-// ------------------------------------------
+
 app.post("/feedback", async (req, res) => {
   try {
     const { replies } = req.body;
@@ -179,7 +175,7 @@ app.post("/end-session", async (req, res) => {
       duration,
       userReplies,
       feedback,
-      user, // This comes from cookie on frontend
+      user, 
     } = req.body;
 
     if (!user || !user.email) {

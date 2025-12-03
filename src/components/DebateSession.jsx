@@ -18,7 +18,6 @@ const DebateSession = () => {
   const [timerRunning, setTimerRunning] = useState(false);
   const [messages, setMessages] = useState([]);
 
-
   const timerRef = useRef(null);
 
   useEffect(() => {
@@ -141,10 +140,8 @@ const DebateSession = () => {
 
     const data = await res.json();
 
-    // Add AI reply
     setMessages((prev) => [...prev, { sender: "ai", text: data.reply }]);
 
-    // 🔊 Speak AI reply
     speakText(data.reply);
 
     setInput("");
@@ -224,29 +221,33 @@ const DebateSession = () => {
         <div className="debate-conversation">
           <h3>💬 Debate Conversation</h3>
 
-          {messages.map((msg, i) => (
-            <div key={i} className={`message ${msg.sender}`}>
-              <p>{msg.text}</p>
-              <span className="meta">{msg.time}</span>
+          <div className="messages-container">
+            {messages.map((msg, i) => (
+              <div key={i} className={`message ${msg.sender}`}>
+                <p>{msg.text}</p>
+                <span className="meta">{msg.time}</span>
+              </div>
+            ))}
+          </div>
+
+          <div className="input-container">
+            <div className="input-box">
+              <FaMicrophone
+                className={`mic-icon ${recording ? "recording" : ""}`}
+                onClick={startListening}
+              />
+
+              <input
+                type="text"
+                placeholder="Type your argument..."
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+              />
+
+              <button className="send-btn" onClick={handleSend}>
+                <FaPaperPlane />
+              </button>
             </div>
-          ))}
-
-          <div className="input-box">
-            <FaMicrophone
-              className={`mic-icon ${recording ? "recording" : ""}`}
-              onClick={startListening}
-            />
-
-            <input
-              type="text"
-              placeholder="Type your argument..."
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-            />
-
-            <button className="send-btn" onClick={handleSend}>
-              <FaPaperPlane />
-            </button>
           </div>
 
           <p className="input-hint">

@@ -35,7 +35,7 @@ function WelcomeScreen({ setIsLoggedIn }) {
       <header className="navbar">
         <div className="logo">
           <span className="logo-icon">🗨️</span>
-          <span className="logo-text">DebateMaster</span>
+          <span className="logo-text">VOCALAI</span>
         </div>
         <button onClick={handleSignIn} className="get-started-btn">
           Get Started →
@@ -132,8 +132,8 @@ function WelcomeScreen({ setIsLoggedIn }) {
 
       {/* Footer */}
       <footer className="footer">
-        <span className="logo-text">DebateMaster</span>
-        <p>Powered by advanced AI • Built for English learners worldwide</p>
+        <span className="logo-text">VOCALAI</span>
+        <p>Built for English learners worldwide</p>
       </footer>
     </div>
   );
